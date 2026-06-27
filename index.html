@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메이플랜드 레이드 초대기 (초미니)</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background-color: #121214;
+            color: #e3e3e3;
+            padding: 8px;
+            margin: 0;
+        }
+        h1 { 
+            text-align: center;
+            font-size: 14px; 
+            color: #ffb703; 
+            margin: 6px 0; 
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5); 
+        }
+        /* 4개 파티를 좌우 가로로 나열 */
+        .grid-container {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 6px;
+        }
+        .grid-row {
+            display: table-row;
+        }
+        .party-section {
+            display: table-cell;
+            background: #1e1e24;
+            border-top: 3px solid #4af;
+            border-radius: 6px;
+            padding: 6px 8px;
+            vertical-align: top;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .party-section.p1 { border-top-color: #ff4d4d; }
+        .party-section.p4 { border-top-color: #95a5a6; }
+        
+        .party-title {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #fff;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #333;
+        }
+        .member-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3px;
+            background: #25252b;
+            padding: 3px;
+            border-radius: 4px;
+            gap: 4px;
+        }
+        .job-tag {
+            width: 32px;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            padding: 2px 0;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .job-숍 { background-color: #f1c40f; color: #000; }
+        .job-나로 { background-color: #3498db; color: #fff; }
+        .job-샤프 { background-color: #2ecc71; color: #fff; }
+        .job-신궁 { background-color: #27ae60; color: #fff; }
+        .job-닼나 { background-color: #9b59b6; color: #fff; }
+        .job-썬콜 { background-color: #1abc9c; color: #fff; }
+        .job-바이퍼 { background-color: #e67e22; color: #fff; }
+        .job-팔라 { background-color: #95a5a6; color: #fff; }
+
+        .invite-btn {
+            flex-grow: 1;
+            background: #3a3a4a;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 3px 4px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 11px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            transition: all 0.1s;
+        }
+        .invite-btn:hover {
+            background: #505065;
+            border-color: #4af;
+        }
+        .invite-btn.copied {
+            background: #2e7d32 !important;
+            border-color: #4caf50 !important;
+        }
+        .status-bar {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: #4af;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+<h1>⚔️ 레이드 초대기 (초미니) ⚔️</h1>
+
+<div class="grid-container">
+    <div class="grid-row">
+        <!-- 1파티 -->
+        <div class="party-section p1">
+            <div class="party-title">🔥 1파티 (유혹)</div>
+            <div class="member-row">
+                <span class="job-tag job-숍">비숍</span>
+                <button class="invite-btn" onclick="copyInvite('개쌀숭이', this)">개쌀숭이</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-나로">나로</span>
+                <button class="invite-btn" onclick="copyInvite('국과', this)">국과</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-나로">나로</span>
+                <button class="invite-btn" onclick="copyInvite('바람행', this)">바람행</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-샤프">샤프</span>
+                <button class="invite-btn" onclick="copyInvite('풍사수', this)">풍사수</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-닼나">닼나</span>
+                <button class="invite-btn" onclick="copyInvite('순종', this)">순종</button>
+            </div>
+        </div>
+
+        <!-- 2파티 -->
+        <div class="party-section">
+            <div class="party-title">⚡ 2파티</div>
+            <div class="member-row">
+                <span class="job-tag job-숍">비숍</span>
+                <button class="invite-btn" onclick="copyInvite('좌힐', this)">좌힐</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-나로">나로</span>
+                <button class="invite-btn" onclick="copyInvite('동거남', this)">동거남</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-나로">나로</span>
+                <button class="invite-btn" onclick="copyInvite('펭귄', this)">펭귄</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-나로">나로</span>
+                <button class="invite-btn" onclick="copyInvite('도나', this)">도나</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-신궁">신궁</span>
+                <button class="invite-btn" onclick="copyInvite('우쭈쭈줌', this)">우쭈쭈줌</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-닼나">닼나</span>
+                <button class="invite-btn" onclick="copyInvite('정육알바생', this)">정육알바생</button>
+            </div>
+        </div>
+
+        <!-- 3파티 -->
+        <div class="party-section">
+            <div class="party-title">❄️ 3파티</div>
+            <div class="member-row">
+                <span class="job-tag job-숍">비숍</span>
+                <button class="invite-btn" onclick="copyInvite('깐떡', this)">깐떡</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-닼나">닼나</span>
+                <button class="invite-btn" onclick="copyInvite('남캠의신vv', this)">남캠의신vv</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-썬콜">썬콜</span>
+                <button class="invite-btn" onclick="copyInvite('두이', this)">두이</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-썬콜">썬콜</span>
+                <button class="invite-btn" onclick="copyInvite('울페리아', this)">울페리아</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-썬콜">썬콜</span>
+                <button class="invite-btn" onclick="copyInvite('꿀냐미', this)">꿀냐미</button>
+            </div>
+            <div class="member-row">
+                <span class="job-tag job-바이퍼">바이퍼</span>
+                <button class="invite-btn" onclick="copyInvite('김갑진', this)">김갑진</button>
+            </div>
+        </div>
+
+        <!-- 4파티 -->
+        <div class="party-section p4">
+            <div class="party-title">🛡️ 4파티</div>
+            <div class="member-row">
+                <span class="job-tag job-팔라">팔라</span>
+                <button class="invite-btn" onclick="copyInvite('미유밍', this)">미유밍</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="statusBar" class="status-bar"></div>
+
+<script>
+    function copyInvite(name, element) {
+        const command = `/파티초대 ${name}`;
+        navigator.clipboard.writeText(command).then(() => {
+            element.classList.add('copied');
+            setTimeout(() => element.classList.remove('copied'), 300);
+            
+            const statusBar = document.getElementById('statusBar');
+            statusBar.innerText = `✅ ${name}`;
+            statusBar.style.display = 'block';
+            
+            if (window.statusTimeout) clearTimeout(window.statusTimeout);
+            window.statusTimeout = setTimeout(() => {
+                statusBar.style.display = 'none';
+            }, 800);
+        }).catch(err => console.error(err));
+    }
+</script>
+
+</body>
+</html>
