@@ -3,242 +3,680 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메이플랜드 레이드 초대기 (초미니)</title>
+    <title>HT 카오스 레이드 멀티 어시스턴트</title>
     <style>
-        * { box-sizing: border-box; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0;
+        }
         body {
-            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
-            background-color: #121214;
-            color: #e3e3e3;
-            padding: 8px;
-            margin: 0;
-        }
-        h1 { 
-            text-align: center;
-            font-size: 14px; 
-            color: #ffb703; 
-            margin: 6px 0; 
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5); 
-        }
-        /* 4개 파티를 좌우 가로로 나열 */
-        .grid-container {
-            display: table;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Pretendard', sans-serif;
+            background-color: #0b0c10;
+            color: #e2e8f0;
+            padding: 10px;
+            user-select: none;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow: hidden; /* 가로 및 세로 스크롤 절대 발생 방지 */
             width: 100%;
-            table-layout: fixed;
-            border-collapse: separate;
-            border-spacing: 6px;
         }
-        .grid-row {
-            display: table-row;
+
+        /* --- 상단 타이틀 --- */
+        h1.main-title {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #f59e0b;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+            flex-shrink: 0;
+            margin-bottom: 2px;
         }
-        .party-section {
-            display: table-cell;
-            background: #1e1e24;
-            border-top: 3px solid #4af;
-            border-radius: 6px;
-            padding: 6px 8px;
-            vertical-align: top;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+        /* --- 상단 파티 초대기 영역 --- */
+        .invite-section {
+            flex: 0 0 35%; /* 상단 공간 35% 고정 */
+            min-height: 0;
+            width: 100%;
         }
-        .party-section.p1 { border-top-color: #ff4d4d; }
-        .party-section.p4 { border-top-color: #95a5a6; }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            height: 100%;
+            width: 100%;
+        }
+        .party-box {
+            background: #14151a;
+            border-top: 3px solid #3b82f6;
+            border-radius: 8px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            min-height: 0;
+            transition: border-color 0.2s;
+        }
+        .party-box.p1 { border-top-color: #ec4899; } /* 1파티 핑크색 강조 */
+        .party-box.p4 { border-top-color: #64748b; }
         
         .party-title {
-            font-size: 11px;
-            font-weight: bold;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            border-bottom: 1px solid #27272a;
+            padding-bottom: 4px;
             margin-bottom: 6px;
-            color: #fff;
-            padding-bottom: 3px;
-            border-bottom: 1px solid #333;
+            text-align: center;
+            flex-shrink: 0;
+            letter-spacing: 0.5px;
+        }
+        .member-list {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            flex-grow: 1;
+            overflow-y: auto;
+            justify-content: space-between;
+            min-height: 0;
         }
         .member-row {
             display: flex;
             align-items: center;
-            margin-bottom: 3px;
-            background: #25252b;
-            padding: 3px;
-            border-radius: 4px;
-            gap: 4px;
+            background: #1c1d24;
+            padding: 4px 6px;
+            border-radius: 5px;
+            gap: 6px;
+            height: 18%; /* 행 비율 분배 */
+            min-height: 24px;
         }
         .job-tag {
-            width: 32px;
-            font-size: 10px;
-            font-weight: bold;
+            width: 30px;
+            font-size: 9px;
+            font-weight: 800;
             text-align: center;
             padding: 2px 0;
             border-radius: 3px;
             flex-shrink: 0;
         }
-        .job-숍 { background-color: #f1c40f; color: #000; }
-        .job-나로 { background-color: #3498db; color: #fff; }
-        .job-샤프 { background-color: #2ecc71; color: #fff; }
-        .job-신궁 { background-color: #27ae60; color: #fff; }
-        .job-닼나 { background-color: #9b59b6; color: #fff; }
-        .job-썬콜 { background-color: #1abc9c; color: #fff; }
-        .job-바이퍼 { background-color: #e67e22; color: #fff; }
-        .job-팔라 { background-color: #95a5a6; color: #fff; }
+        .job-숍 { background-color: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+        .job-나로 { background-color: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); }
+        .job-샤프 { background-color: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+        .job-신궁 { background-color: rgba(5, 150, 105, 0.2); color: #10b981; border: 1px solid rgba(5, 150, 105, 0.4); }
+        .job-닼나 { background-color: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4); }
+        .job-썬콜 { background-color: rgba(6, 182, 212, 0.2); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.4); }
+        .job-바이퍼 { background-color: rgba(249, 115, 22, 0.2); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.4); }
+        .job-팔라 { background-color: rgba(100, 116, 139, 0.2); color: #94a3b8; border: 1px solid rgba(100, 116, 139, 0.4); }
 
         .invite-btn {
             flex-grow: 1;
-            background: #3a3a4a;
-            color: #fff;
-            border: 1px solid #555;
-            padding: 3px 4px;
-            border-radius: 3px;
+            background: #252631;
+            color: #cbd5e1;
+            border: 1px solid #3f3f46;
+            padding: 2px 4px;
+            border-radius: 4px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 11px;
+            font-weight: 700;
+            font-size: 0.75rem;
             text-align: center;
             overflow: hidden;
-            text-overflow: ellipsis;
             white-space: nowrap;
-            transition: all 0.1s;
+            text-overflow: ellipsis;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
         }
-        .invite-btn:hover {
-            background: #505065;
-            border-color: #4af;
+        .invite-btn:hover { background: #2f303d; color: #fff; border-color: #52525b; }
+        .invite-btn.copied { background: #15803d !important; border-color: #22c55e !important; color: #fff; }
+
+        /* --- 하단 타이머 영역 (62% 공간 할당) --- */
+        .timer-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px dashed #27272a;
+            padding-top: 8px;
+            min-height: 0;
+            width: 100%;
         }
-        .invite-btn.copied {
-            background: #2e7d32 !important;
-            border-color: #4caf50 !important;
+        .btn-phase {
+            background-color: #1e3a8a;
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 8px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            flex-shrink: 0;
+            transition: all 0.2s;
         }
+        .btn-phase:hover { background-color: #2563eb; color: #fff; border-color: #3b82f6; }
+
+        /* 타이머 3개 균등 배치 그리드 (좌팔 - 우팔 - 갈) */
+        .timer-grid {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            flex-grow: 1;
+            min-height: 0;
+        }
+        .flex-wrapper {
+            flex: 1;
+            min-width: 0; /* flex 아이템 넘침 현상 방지 필수 */
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            height: 100%;
+        }
+        .dispel-wrapper {
+            flex: 1.1; /* 갈(버프해제) 영역은 세로 헤더가 존재하므로 약간 더 유연하게 */
+        }
+        
+        /* 카드 공통 디자인 */
+        .timer-card {
+            background-color: #12131a;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            min-height: 0;
+            border: 1px solid #27272a;
+        }
+        .timer-card:hover {
+            background-color: #171821;
+        }
+        .timer-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .time-display {
+            font-size: 2.8rem; /* 지나치게 크지 않으면서도 가시성 극대화 */
+            font-weight: 800;
+            color: #fbbf24;
+            line-height: 1;
+            font-family: monospace, sans-serif;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.15);
+        }
+        .status-text {
+            font-size: 0.8rem;
+            font-weight: 700;
+            width: 100%;
+            padding: 4px 0;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.03);
+            letter-spacing: 0.3px;
+        }
+
+        /* 개별 유혹 카드 테마 (좌/우) */
+        .card-L { border-top: 3px solid #f472b6; }
+        .name-L { color: #f472b6; }
+        .card-R { border-top: 3px solid #60a5fa; }
+        .name-R { color: #60a5fa; }
+        
+        .btn-stop {
+            background: #7f1d1d;
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 70%;
+            transition: all 0.15s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .btn-stop:hover { background: #b91c1c; color: #fff; border-color: #ef4444; }
+
+        /* 버프해제 (갈) 주기 선택 헤더 */
+        .toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #12131a;
+            padding: 4px 8px;
+            border-radius: 6px 6px 0 0;
+            border: 1px solid #27272a;
+            border-bottom: none;
+            border-top: 3px solid #fb923c;
+            flex-shrink: 0;
+        }
+        .toggle-title {
+            font-size: 0.75rem;
+            color: #fb923c;
+            font-weight: 700;
+        }
+        .toggle-buttons {
+            display: flex;
+            gap: 4px;
+        }
+        .btn-toggle {
+            background-color: #1f2029;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-toggle.active {
+            background-color: #fb923c;
+            color: #0f172a;
+            border-color: #fb923c;
+        }
+        .card-dispel {
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+        .name-dispel { color: #fb923c; }
+
+        /* 미세 시간 조절 (+5 / -5) */
+        .tweak-group {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+        .btn-tweak {
+            flex: 1;
+            border: none;
+            color: #fff;
+            font-size: 0.8rem;
+            padding: 5px 0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.1s;
+        }
+        .btn-tweak:active { opacity: 0.8; }
+        .btn-plus { background: #166534; color: #86efac; border: 1px solid rgba(34, 197, 94, 0.2); }
+        .btn-minus { background: #7f1d1d; color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+        /* 타이머 상황별 상태 색상 */
+        .status-ready { color: #94a3b8; }
+        .status-running { color: #ef4444; }
+        .status-shield { color: #10b981; }
+        .status-overdue { color: #ef4444; animation: pulse 0.6s infinite alternate; }
+        .status-dispel-danger { color: #f97316; }
+
+        /* 경고 깜빡임 애니메이션 (원색 투박함 제거, 부드러운 네온 글로우 스타일) */
+        @keyframes blink-L { from { border-color: #27272a; } to { background-color: #3b1126; border-color: #f472b6; box-shadow: 0 0 10px rgba(244, 114, 182, 0.15); } }
+        @keyframes blink-R { from { border-color: #27272a; } to { background-color: #11213b; border-color: #60a5fa; box-shadow: 0 0 10px rgba(96, 165, 250, 0.15); } }
+        @keyframes blink-dispel { from { border-color: #27272a; } to { background-color: #3b1d11; border-color: #fb923c; box-shadow: 0 0 10px rgba(251, 146, 60, 0.15); } }
+        .danger-L { animation: blink-L 0.4s infinite alternate; }
+        .danger-R { animation: blink-R 0.4s infinite alternate; }
+        .danger-dispel { animation: blink-dispel 0.4s infinite alternate; }
+        @keyframes pulse { from { opacity: 0.7; } to { opacity: 1; } }
+
+        /* 토스트 상태 알림바 */
         .status-bar {
             position: fixed;
-            bottom: 10px;
+            bottom: 12px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.85);
-            color: #4af;
-            padding: 4px 12px;
+            background: rgba(15, 23, 42, 0.95);
+            color: #10b981;
+            border: 1px solid #10b981;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-weight: bold;
-            font-size: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            font-size: 11px;
+            font-weight: 800;
             display: none;
-            z-index: 1000;
+            z-index: 9999;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
         }
     </style>
 </head>
 <body>
 
-<h1>⚔️ 레이드 초대기 (초미니) ⚔️</h1>
+    <!-- 메인 타이틀 -->
+    <h1 class="main-title">⚔️ CHAOS HORNTAIL RAID BOARD ⚔️</h1>
 
-<div class="grid-container">
-    <div class="grid-row">
-        <!-- 1파티 -->
-        <div class="party-section p1">
-            <div class="party-title">🔥 1파티 (유혹)</div>
-            <div class="member-row">
-                <span class="job-tag job-숍">비숍</span>
-                <button class="invite-btn" onclick="copyInvite('개쌀숭이', this)">개쌀숭이</button>
+    <!-- 1. 파티원 초대 리스트 영역 -->
+    <div class="invite-section">
+        <div class="grid-container">
+            <!-- 1파티 -->
+            <div class="party-box p1">
+                <div class="party-title">🔥 1파티 (유혹)</div>
+                <div class="member-list">
+                    <div class="member-row"><span class="job-tag job-숍">비숍</span><button class="invite-btn" onclick="copyInvite('개쌀숭이', this)">개쌀숭이</button></div>
+                    <div class="member-row"><span class="job-tag job-나로">나로</span><button class="invite-btn" onclick="copyInvite('국과', this)">국과</button></div>
+                    <div class="member-row"><span class="job-tag job-나로">나로</span><button class="invite-btn" onclick="copyInvite('바람행', this)">바람행</button></div>
+                    <div class="member-row"><span class="job-tag job-샤프">샤프</span><button class="invite-btn" onclick="copyInvite('풍사수', this)">풍사수</button></div>
+                    <div class="member-row"><span class="job-tag job-닼나">닼나</span><button class="invite-btn" onclick="copyInvite('순종', this)">순종</button></div>
+                </div>
             </div>
-            <div class="member-row">
-                <span class="job-tag job-나로">나로</span>
-                <button class="invite-btn" onclick="copyInvite('국과', this)">국과</button>
+            <!-- 2파티 -->
+            <div class="party-box">
+                <div class="party-title">⚡ 2파티</div>
+                <div class="member-list">
+                    <div class="member-row"><span class="job-tag job-숍">비숍</span><button class="invite-btn" onclick="copyInvite('좌힐', this)">좌힐</button></div>
+                    <div class="member-row"><span class="job-tag job-나로">나로</span><button class="invite-btn" onclick="copyInvite('동거남', this)">동거남</button></div>
+                    <div class="member-row"><span class="job-tag job-나로">나로</span><button class="invite-btn" onclick="copyInvite('펭귄', this)">펭귄</button></div>
+                    <div class="member-row"><span class="job-tag job-나로">나로</span><button class="invite-btn" onclick="copyInvite('도나', this)">도나</button></div>
+                    <div class="member-row"><span class="job-tag job-신궁">신궁</span><button class="invite-btn" onclick="copyInvite('우쭈쭈줌', this)">우쭈쭈줌</button></div>
+                </div>
             </div>
-            <div class="member-row">
-                <span class="job-tag job-나로">나로</span>
-                <button class="invite-btn" onclick="copyInvite('바람행', this)">바람행</button>
+            <!-- 3파티 -->
+            <div class="party-box">
+                <div class="party-title">❄️ 3파티</div>
+                <div class="member-list">
+                    <div class="member-row"><span class="job-tag job-숍">비숍</span><button class="invite-btn" onclick="copyInvite('깐떡', this)">깐떡</button></div>
+                    <div class="member-row"><span class="job-tag job-닼나">닼나</span><button class="invite-btn" onclick="copyInvite('남캠의신vv', this)">남캠의신vv</button></div>
+                    <div class="member-row"><span class="job-tag job-썬콜">썬콜</span><button class="invite-btn" onclick="copyInvite('두이', this)">두이</button></div>
+                    <div class="member-row"><span class="job-tag job-썬콜">썬콜</span><button class="invite-btn" onclick="copyInvite('울페리아', this)">울페리아</button></div>
+                    <div class="member-row"><span class="job-tag job-썬콜">썬콜</span><button class="invite-btn" onclick="copyInvite('꿀냐미', this)">꿀냐미</button></div>
+                </div>
             </div>
-            <div class="member-row">
-                <span class="job-tag job-샤프">샤프</span>
-                <button class="invite-btn" onclick="copyInvite('풍사수', this)">풍사수</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-닼나">닼나</span>
-                <button class="invite-btn" onclick="copyInvite('순종', this)">순종</button>
-            </div>
-        </div>
-
-        <!-- 2파티 -->
-        <div class="party-section">
-            <div class="party-title">⚡ 2파티</div>
-            <div class="member-row">
-                <span class="job-tag job-숍">비숍</span>
-                <button class="invite-btn" onclick="copyInvite('좌힐', this)">좌힐</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-나로">나로</span>
-                <button class="invite-btn" onclick="copyInvite('동거남', this)">동거남</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-나로">나로</span>
-                <button class="invite-btn" onclick="copyInvite('펭귄', this)">펭귄</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-나로">나로</span>
-                <button class="invite-btn" onclick="copyInvite('도나', this)">도나</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-신궁">신궁</span>
-                <button class="invite-btn" onclick="copyInvite('우쭈쭈줌', this)">우쭈쭈줌</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-닼나">닼나</span>
-                <button class="invite-btn" onclick="copyInvite('정육알바생', this)">정육알바생</button>
-            </div>
-        </div>
-
-        <!-- 3파티 -->
-        <div class="party-section">
-            <div class="party-title">❄️ 3파티</div>
-            <div class="member-row">
-                <span class="job-tag job-숍">비숍</span>
-                <button class="invite-btn" onclick="copyInvite('깐떡', this)">깐떡</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-닼나">닼나</span>
-                <button class="invite-btn" onclick="copyInvite('남캠의신vv', this)">남캠의신vv</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-썬콜">썬콜</span>
-                <button class="invite-btn" onclick="copyInvite('두이', this)">두이</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-썬콜">썬콜</span>
-                <button class="invite-btn" onclick="copyInvite('울페리아', this)">울페리아</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-썬콜">썬콜</span>
-                <button class="invite-btn" onclick="copyInvite('꿀냐미', this)">꿀냐미</button>
-            </div>
-            <div class="member-row">
-                <span class="job-tag job-바이퍼">바이퍼</span>
-                <button class="invite-btn" onclick="copyInvite('김갑진', this)">김갑진</button>
-            </div>
-        </div>
-
-        <!-- 4파티 -->
-        <div class="party-section p4">
-            <div class="party-title">🛡️ 4파티</div>
-            <div class="member-row">
-                <span class="job-tag job-팔라">팔라</span>
-                <button class="invite-btn" onclick="copyInvite('미유밍', this)">미유밍</button>
+            <!-- 4파티 -->
+            <div class="party-box p4">
+                <div class="party-title">🛡️ 4파티</div>
+                <div class="member-list">
+                    <div class="member-row"><span class="job-tag job-팔라">팔라</span><button class="invite-btn" onclick="copyInvite('미유밍', this)">미유밍</button></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="statusBar" class="status-bar"></div>
+    <!-- 2. 하단 타이머 컨트롤 영역 (순서: 좌팔 - 우팔 - 갈) -->
+    <div class="timer-section">
+        <button class="btn-phase" onclick="changePhase()">🔄 타이머 전체 초기화 (버프해제 리셋)</button>
+        
+        <div class="timer-grid">
+            <!-- 1) 좌측 유혹 (좌팔) -->
+            <div class="flex-wrapper">
+                <div id="card-L" class="timer-card card-L" onclick="startTempt('L')">
+                    <div class="timer-name name-L">좌측 유혹 (좌팔)</div>
+                    <div id="display-L" class="time-display">OFF</div>
+                    <div id="status-L" class="status-text status-ready">클릭하여 시작</div>
+                    <button class="btn-stop" onclick="stopTempt('L', event)">팔 파괴</button>
+                </div>
+                <div class="tweak-group">
+                    <button class="btn-tweak btn-plus" onclick="tweakTempt('L', 5)">+5초</button>
+                    <button class="btn-tweak btn-minus" onclick="tweakTempt('L', -5)">-5초</button>
+                </div>
+            </div>
 
-<script>
-    function copyInvite(name, element) {
-        const command = `/파티초대 ${name}`;
-        navigator.clipboard.writeText(command).then(() => {
-            element.classList.add('copied');
-            setTimeout(() => element.classList.remove('copied'), 300);
+            <!-- 2) 우측 유혹 (우팔) -->
+            <div class="flex-wrapper">
+                <div id="card-R" class="timer-card card-R" onclick="startTempt('R')">
+                    <div class="timer-name name-R">우측 유혹 (우팔)</div>
+                    <div id="display-R" class="time-display">OFF</div>
+                    <div id="status-R" class="status-text status-ready">클릭하여 시작</div>
+                    <button class="btn-stop" onclick="stopTempt('R', event)">팔 파괴</button>
+                </div>
+                <div class="tweak-group">
+                    <button class="btn-tweak btn-plus" onclick="tweakTempt('R', 5)">+5초</button>
+                    <button class="btn-tweak btn-minus" onclick="tweakTempt('R', -5)">-5초</button>
+                </div>
+            </div>
+
+            <!-- 3) 버프해제 (갈) -->
+            <div class="flex-wrapper dispel-wrapper">
+                <div class="toggle-container">
+                    <div class="toggle-title">버해(갈) 주기</div>
+                    <div class="toggle-buttons">
+                        <button id="t-3m" class="btn-toggle" onclick="setDisp(180)">3분</button>
+                        <button id="t-5m" class="btn-toggle active" onclick="setDisp(300)">5분</button>
+                    </div>
+                </div>
+                <div id="card-D" class="timer-card card-dispel" onclick="startDisp()">
+                    <div class="timer-name name-dispel">버프해제 (갈 - <span id="txt-max">5분</span>)</div>
+                    <div id="display-D" class="time-display">READY</div>
+                    <div id="status-D" class="status-text status-ready">클릭하여 시작</div>
+                </div>
+                <div class="tweak-group">
+                    <button class="btn-tweak btn-plus" onclick="tweakDisp(5)">+5초</button>
+                    <button class="btn-tweak btn-minus" onclick="tweakDisp(-5)">-5초</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 복사 피드백 모달 -->
+    <div id="statusBar" class="status-bar"></div>
+
+    <script>
+        // 초대 복사 시스템
+        function copyInvite(name, btnElement) {
+            // iFrame 호환성을 보장하는 document.execCommand 복사 폴백 사용
+            const command = `/파티초대 ${name}`;
+            const tArea = document.createElement("textarea");
+            tArea.value = command;
+            document.body.appendChild(tArea);
+            tArea.select();
+            try {
+                document.execCommand('copy');
+                btnElement.classList.add('copied');
+                setTimeout(() => btnElement.classList.remove('copied'), 300);
+                
+                const sBar = document.getElementById('statusBar');
+                sBar.innerText = `✅ [ ${name} ] 초대 명령어 복사완료!`;
+                sBar.style.display = 'block';
+                if (window.statusTimeout) clearTimeout(window.statusTimeout);
+                window.statusTimeout = setTimeout(() => sBar.style.display = 'none', 800);
+            } catch (err) {
+                console.error('복사 실패:', err);
+            }
+            document.body.removeChild(tArea);
+        }
+
+        // 타이머 상태 관리 데이터
+        let tL = { id: null, time: -9999, last: -1 };
+        let tR = { id: null, time: -9999, last: -1 };
+        let tD = { id: null, time: -9999, max: 300, last: -1 };
+        const T_TOTAL = 180;
+
+        // TTS 스피치 함수
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ko-KR';
+            utterance.rate = 1.15; // 신속한 피드백을 위해 살짝 빠른 배속
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // 유혹 타이머 제어 (L / R)
+        function startTempt(side) {
+            let target = (side === 'L') ? tL : tR;
+            if (target.id) clearInterval(target.id);
             
-            const statusBar = document.getElementById('statusBar');
-            statusBar.innerText = `✅ ${name}`;
-            statusBar.style.display = 'block';
+            target.time = T_TOTAL;
+            target.last = -1;
+            updateUI();
             
-            if (window.statusTimeout) clearTimeout(window.statusTimeout);
-            window.statusTimeout = setTimeout(() => {
-                statusBar.style.display = 'none';
-            }, 800);
-        }).catch(err => console.error(err));
-    }
-</script>
+            target.id = setInterval(() => {
+                target.time--;
+                
+                // 유혹 발생 10초 전 경고 알림 (좌/우 구분)
+                if (target.time === 10 && target.last !== 10) {
+                    speak(side === 'L' ? "좌측 유혹 10초 전" : "우측 유혹 10초 전");
+                    target.last = 10;
+                }
+                updateUI();
+            }, 1000);
+        }
 
+        // 팔 파괴 (개별 타이머 정지/종료)
+        function stopTempt(side, event) {
+            if (event) event.stopPropagation(); // 카드 클릭 중복 발동 원천 차단
+            let target = (side === 'L') ? tL : tR;
+            if (target.id) {
+                clearInterval(target.id);
+                target.id = null;
+            }
+            target.time = -9999;
+            target.last = -1;
+            updateUI();
+            speak(side === 'L' ? "좌측 팔 파괴 완료" : "우측 팔 파괴 완료");
+        }
+
+        // 버프해제 (갈) 타이머 제어
+        function startDisp() {
+            if (tD.id) clearInterval(tD.id);
+            tD.time = tD.max;
+            tD.last = -1;
+            updateUI();
+            
+            tD.id = setInterval(() => {
+                tD.time--;
+                
+                // 공통 10초 전 경고
+                if (tD.time === 10 && tD.last !== 10) {
+                    speak("버프해제 10초 전");
+                    tD.last = 10;
+                }
+                
+                // 3분 모드 전용 특수 스케줄 알림 (-1분 50초 경과 시점 = 잔여 70초)
+                if (tD.max === 180 && tD.time === 70 && tD.last !== 70) {
+                    speak("버프해제 10초 전");
+                    tD.last = 70;
+                }
+                updateUI();
+            }, 1000);
+        }
+
+        // 버프해제 주기 설정 변경 (3분 <-> 5분)
+        function setDisp(seconds) {
+            tD.max = seconds;
+            document.getElementById('txt-max').innerText = seconds === 180 ? "3분" : "5분";
+            document.getElementById('t-3m').classList.toggle('active', seconds === 180);
+            document.getElementById('t-5m').classList.toggle('active', seconds === 300);
+            
+            if (tD.time !== -9999 && tD.time > tD.max) {
+                tD.time = tD.max;
+            }
+            updateUI();
+        }
+
+        // 미세 시간 조절 (+5 / -5)
+        function tweakTempt(side, amount) {
+            let target = (side === 'L') ? tL : tR;
+            if (target.time !== -9999) {
+                target.time += amount;
+                updateUI();
+            }
+        }
+        function tweakDisp(amount) {
+            if (tD.time !== -9999) {
+                tD.time += amount;
+                updateUI();
+            }
+        }
+
+        // 타이머 전체/리셋 초기화
+        function changePhase() {
+            window.speechSynthesis.cancel();
+            if (tD.id) {
+                clearInterval(tD.id);
+                tD.id = null;
+            }
+            tD.time = -9999;
+            tD.last = -1;
+            updateUI();
+        }
+
+        // 종합 UI 새로고침 및 스타일 분기 처리
+        function updateUI() {
+            // 좌측 유혹 렌더링
+            drawTemptCard('L', tL);
+            
+            // 우측 유혹 렌더링
+            drawTemptCard('R', tR);
+
+            // 버프해제 렌더링
+            const dD = document.getElementById('display-D');
+            const sD = document.getElementById('status-D');
+            const cD = document.getElementById('card-D');
+            
+            dD.innerText = formatTime(tD.time, false);
+            cD.classList.remove('danger-dispel');
+            
+            if (tD.time !== -9999) {
+                if (tD.time < 0) {
+                    dD.style.color = "#f87171";
+                    sD.innerText = "초과! (리셋)";
+                    sD.className = "status-text status-overdue";
+                } else if (tD.time <= 20) {
+                    dD.style.color = "#f87171";
+                    sD.innerText = "⚠️ 위험!!";
+                    sD.className = "status-text status-dispel-danger";
+                    if (tD.time <= 15) {
+                        cD.classList.add('danger-dispel');
+                    }
+                } else {
+                    dD.style.color = "#ef4444";
+                    sD.innerText = "진행중";
+                    sD.className = "status-text status-running";
+                }
+            } else {
+                dD.style.color = "#fbbf24";
+                sD.innerText = "클릭 시작";
+                sD.className = "status-text status-ready";
+            }
+        }
+
+        // 유혹 개별 카드 그리기 유틸
+        function drawTemptCard(side, targetObj) {
+            const disp = document.getElementById('display-' + side);
+            const stat = document.getElementById('status-' + side);
+            const card = document.getElementById('card-' + side);
+            
+            disp.innerText = formatTime(targetObj.time, true);
+            card.classList.remove('danger-' + side);
+            
+            if (targetObj.time !== -9999) {
+                if (targetObj.time < 0) {
+                    disp.style.color = "#f87171";
+                    stat.innerText = "초과!";
+                    stat.className = "status-text status-overdue";
+                } else if (targetObj.time <= 10) {
+                    disp.style.color = "#34d399";
+                    stat.innerText = "🛡️ 실드!!";
+                    stat.className = "status-text status-shield";
+                    card.classList.add('danger-' + side);
+                } else {
+                    disp.style.color = "#ef4444";
+                    stat.innerText = "진행중";
+                    stat.className = "status-text status-running";
+                }
+            } else {
+                disp.style.color = "#4b5563";
+                stat.innerText = "정지됨";
+                stat.className = "status-text status-ready";
+                disp.innerText = "OFF";
+            }
+        }
+
+        // 시간 포맷 변환 함수
+        function formatTime(seconds, isArm) {
+            if (seconds === -9999) return isArm ? "OFF" : "READY";
+            const isNeg = seconds < 0;
+            const absoluteSec = Math.abs(seconds);
+            const min = Math.floor(absoluteSec / 60);
+            const sec = absoluteSec % 60;
+            return `${isNeg ? '-' : ''}${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+    </script>
 </body>
 </html>
