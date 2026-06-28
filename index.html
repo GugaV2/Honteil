@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HT 카오스 레이드 통합 보드</title>
-    <!-- Tailwind CSS 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@700;800&display=swap');
@@ -58,7 +57,6 @@
 </head>
 <body class="h-screen w-screen flex flex-col justify-between p-3 text-slate-200">
 
-    <!-- 상단: 파티 초대기 구역 (화면 높이의 약 43% 차지) -->
     <div class="h-[43vh] flex flex-col justify-between min-h-0 mb-1 flex-shrink-0">
         <div class="flex items-center justify-between px-1 mb-1">
             <h1 class="text-sm font-black tracking-wider text-amber-500 uppercase">⚔️ CHAOS HORNTAIL RAID BOARD</h1>
@@ -66,12 +64,10 @@
         </div>
         
         <div class="grid grid-cols-4 gap-2 flex-1 min-h-0">
-            <!-- 1파티 -->
             <div class="flex flex-col h-full bg-[#111218] border-t-4 border-pink-500 rounded-lg p-2 justify-start gap-1">
                 <div class="text-[11px] font-bold text-pink-400 border-b border-slate-800 pb-1 mb-1 text-center">🔥 1파티 (개인유혹)</div>
                 <div class="flex flex-col justify-start gap-1 min-h-0 overflow-y-auto">
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-숍 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 text-[9px] font-extrabold px-1 rounded">비숍</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('개쌀숭이', this)">개쌀숭이</button></div>
-                    <!-- P1 공석 나로 슬롯을 숍 아래로 정렬 이동 -->
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-나로 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[9px] font-extrabold px-1 rounded">나로</span><button class="flex-1 text-left text-[11px] font-bold text-slate-500 truncate" onclick="copyInvite('??', this)">?? (공석)</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-나로 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[9px] font-extrabold px-1 rounded">나로</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('국과', this)">국과</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-나로 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[9px] font-extrabold px-1 rounded">나로</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('바람행', this)">바람행</button></div>
@@ -80,7 +76,6 @@
                 </div>
             </div>
 
-            <!-- 2파티 -->
             <div class="flex flex-col h-full bg-[#111218] border-t-4 border-cyan-500 rounded-lg p-2 justify-start gap-1">
                 <div class="text-[11px] font-bold text-cyan-400 border-b border-slate-800 pb-1 mb-1 text-center">⚡ 2파티</div>
                 <div class="flex flex-col justify-start gap-1 min-h-0 overflow-y-auto">
@@ -89,12 +84,10 @@
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-나로 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[9px] font-extrabold px-1 rounded">나로</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('펭귄', this)">펭귄</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-나로 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[9px] font-extrabold px-1 rounded">나로</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('도나', this)">도나</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-신궁 bg-emerald-600/20 text-emerald-400 border border-emerald-600/30 text-[9px] font-extrabold px-1 rounded">신궁</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('우쭈쭈줌', this)">우쭈쭈줌</button></div>
-                    <!-- 누락되었던 2파티 정육알바생 정상 추가 -->
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-닼나 bg-purple-500/20 text-purple-400 border border-purple-500/30 text-[9px] font-extrabold px-1 rounded">닼나</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('정육알바생', this)">정육알바생</button></div>
                 </div>
             </div>
 
-            <!-- 3파티 -->
             <div class="flex flex-col h-full bg-[#111218] border-t-4 border-indigo-500 rounded-lg p-2 justify-start gap-1">
                 <div class="text-[11px] font-bold text-indigo-400 border-b border-slate-800 pb-1 mb-1 text-center">❄️ 3파티</div>
                 <div class="flex flex-col justify-start gap-1 min-h-0 overflow-y-auto">
@@ -107,7 +100,6 @@
                 </div>
             </div>
 
-            <!-- 4파티 -->
             <div class="flex flex-col h-full bg-[#111218] border-t-4 border-slate-500 rounded-lg p-2 justify-start gap-1">
                 <div class="text-[11px] font-bold text-slate-400 border-b border-slate-800 pb-1 mb-1 text-center">🛡️ 4파티</div>
                 <div class="flex flex-col justify-start gap-1 min-h-0 overflow-y-auto">
@@ -117,19 +109,15 @@
         </div>
     </div>
 
-    <!-- 하단: 타이머 구역 (화면 높이의 약 54% 차지, 순서: 좌팔 -> 우팔 -> 갈) -->
     <div class="h-[54vh] border-t border-dashed border-slate-800 pt-2 flex flex-col justify-between min-h-0 flex-shrink-0">
         
-        <!-- 타이머 통합 초기화 컨트롤 -->
         <button onclick="changePhase()" class="w-full py-2 bg-blue-950 hover:bg-blue-900 border border-blue-800 text-blue-400 hover:text-blue-300 font-bold rounded-lg text-xs transition-all duration-150 shadow-md flex-shrink-0 mb-2">
             🔄 타이머 전체 초기화 (버프해제 리셋)
         </button>
 
         <div class="grid grid-cols-3 gap-3 flex-1 min-h-0 pb-1">
             
-            <!-- 1) 좌측 유혹 (좌팔) -->
             <div class="flex flex-col h-full gap-2">
-                <!-- 상단 토글 헤더 영역 공간 맞춤 (우측 버해 헤더와 높이 동치) -->
                 <div class="h-[30px] flex-shrink-0"></div>
                 
                 <div id="card-L" onclick="startTempt('L')" class="neon-card flex-1 bg-[#111218] border border-slate-800 rounded-xl p-2.5 flex flex-col justify-between items-center cursor-pointer hover:bg-[#15161f]">
@@ -146,7 +134,6 @@
                 </div>
             </div>
 
-            <!-- 2) 우측 유혹 (우팔) -->
             <div class="flex flex-col h-full gap-2">
                 <div class="h-[30px] flex-shrink-0"></div>
                 
@@ -164,9 +151,7 @@
                 </div>
             </div>
 
-            <!-- 3) 버프해제 (갈) -->
             <div class="flex flex-col h-full gap-2">
-                <!-- 주기 설정 헤더 영역 -->
                 <div class="flex items-center justify-between bg-[#15161f] border border-slate-800 rounded-lg p-1 h-[30px] flex-shrink-0">
                     <span class="text-[10px] font-bold text-orange-400 pl-1">버해(갈) 주기</span>
                     <div class="flex gap-1 h-full">
@@ -177,10 +162,10 @@
                 
                 <div id="card-D" onclick="startDisp()" class="neon-card flex-1 bg-[#111218] border border-slate-800 rounded-xl p-2.5 flex flex-col justify-between items-center cursor-pointer hover:bg-[#15161f]">
                     <div class="text-xs font-bold text-orange-400 tracking-wider">버프해제 (갈 - <span id="txt-max">5분</span>)</div>
-                    <div class="h-4"></div> <!-- 더미 여백 -->
+                    <div class="h-4"></div>
                     <div id="display-D" class="font-['JetBrains_Mono'] text-4xl font-extrabold text-orange-400 leading-none my-1">READY</div>
                     <div id="status-D" class="w-full text-center text-xs font-bold py-1 rounded bg-slate-950/40 text-slate-400 border border-slate-900/40">클릭 시작</div>
-                    <div class="h-5"></div> <!-- 더미 여백 -->
+                    <div class="h-5"></div>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-2 flex-shrink-0">
@@ -192,32 +177,69 @@
         </div>
     </div>
 
-    <!-- 복사 상태 알림 모달 바 -->
     <div id="statusBar" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-950/90 border border-emerald-500/50 text-emerald-400 font-bold text-[11px] px-3 py-1.5 rounded-full shadow-lg hidden z-50"></div>
 
     <script>
-        // 초대 복사 기능 (클립보드 API 폴백 지원)
+        // 수정된 초대 복사 기능 (최신 Clipboard API + 하위 호환 폴백 통합)
         function copyInvite(name, element) {
-            if (name === '??') return; // 공석은 복사 생략
-            const command = `/파티초대 ${name}`;
-            const tempArea = document.createElement("textarea");
-            tempArea.value = command;
-            document.body.appendChild(tempArea);
-            tempArea.select();
-            try {
-                document.execCommand('copy');
+            if (!name || name.includes('??')) return; // 공석 예외 처리
+            
+            const cleanName = name.trim();
+            const command = `/파티초대 ${cleanName}`;
+
+            // 성공 시 UI 연출 공통 함수
+            function showSuccess() {
                 element.classList.add('bg-emerald-900/30', 'text-emerald-300');
                 setTimeout(() => element.classList.remove('bg-emerald-900/30', 'text-emerald-300'), 400);
 
                 const statusBar = document.getElementById('statusBar');
-                statusBar.innerText = `✅ [ ${name} ] 초대 명령어 복사완료!`;
+                statusBar.innerText = `✅ [ ${cleanName} ] 초대 명령어 복사완료!`;
                 statusBar.classList.remove('hidden');
                 if (window.statusTimeout) clearTimeout(window.statusTimeout);
                 window.statusTimeout = setTimeout(() => statusBar.classList.add('hidden'), 800);
-            } catch (err) {
-                console.error('복사 실패:', err);
             }
-            document.body.removeChild(tempArea);
+
+            // 1) 최신 브라우저 표준 Clipboard API 시도 (HTTPS 배포 환경 대응)
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(command)
+                    .then(() => {
+                        showSuccess();
+                    })
+                    .catch(err => {
+                        console.error('Clipboard API 실패, 폴백 시도:', err);
+                        fallbackCopy(command);
+                    });
+            } else {
+                // 2) 구형 브라우저 또는 비보안 환경용 폴백
+                fallbackCopy(command);
+            }
+
+            // 폴백 복사 로직 (기존 execCommand 기반 스크롤 튐 방지 보완)
+            function fallbackCopy(text) {
+                const tempArea = document.createElement("textarea");
+                tempArea.value = text;
+                
+                tempArea.style.position = "fixed";
+                tempArea.style.top = "0";
+                tempArea.style.left = "0";
+                tempArea.style.opacity = "0";
+                
+                document.body.appendChild(tempArea);
+                tempArea.focus();
+                tempArea.select();
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        showSuccess();
+                    } else {
+                        console.error('폴백 복사 명령 실패');
+                    }
+                } catch (err) {
+                    console.error('폴백 복사 중 에러:', err);
+                }
+                document.body.removeChild(tempArea);
+            }
         }
 
         // 타이머 상태 데이터
@@ -233,7 +255,7 @@
             window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'ko-KR';
-            utterance.rate = 1.15; // 실시간 레이드 딜레이 감안 고속 오더
+            utterance.rate = 1.15; 
             window.speechSynthesis.speak(utterance);
         }
 
@@ -249,7 +271,6 @@
             target.id = setInterval(() => {
                 target.time--;
                 
-                // 유혹 타이머 잔여 10초 전 오더
                 if (target.time === 10 && target.last !== 10) {
                     speak(side === 'L' ? "좌측 유혹 10초 전" : "우측 유혹 10초 전");
                     target.last = 10;
@@ -260,7 +281,7 @@
 
         // 팔 파괴 (정지 기능)
         function stopTempt(side, event) {
-            if (event) event.stopPropagation(); // 카드 클릭 감지 중복 차단
+            if (event) event.stopPropagation(); 
             let target = (side === 'L') ? tL : tR;
             if (target.id) {
                 clearInterval(target.id);
@@ -281,13 +302,11 @@
             tD.id = setInterval(() => {
                 tD.time--;
                 
-                // 공통 잔여 10초 전 오더
                 if (tD.time === 10 && tD.last !== 10) {
                     speak("버프해제 10초 전");
                     tD.last = 10;
                 }
                 
-                // 3분 모드 특수 오더 (시작 후 1분 50초 경과 = 잔여 1분 10초 / 70초 지점)
                 if (tD.max === 180 && tD.time === 70 && tD.last !== 70) {
                     speak("버프해제 10초 전");
                     tD.last = 70;
@@ -339,20 +358,15 @@
 
         // 카드 UI 새로고침 핵심 로직
         function updateUI() {
-            // 겹침 경보 여부 계산 (버해 남은 시간이 20초 이하일 때)
             const isDispelActive = tD.time >= 0;
             const isDispelDanger = isDispelActive && tD.time <= OVERLAP_THRESHOLD_DISPEL;
             
             const isLOverlap = tL.time >= 0 && isDispelDanger;
             const isROverlap = tR.time >= 0 && isDispelDanger;
 
-            // 좌측 카드 드로잉
             drawTemptCard('L', tL, isLOverlap);
-            
-            // 우측 카드 드로잉
             drawCard('R', tR, isROverlap);
 
-            // 버프해제 카드 드로잉
             const dD = document.getElementById('display-D');
             const sD = document.getElementById('status-D');
             const cD = document.getElementById('card-D');
@@ -384,7 +398,7 @@
             }
         }
 
-        // 유혹 카드용 갱신 유틸 (하늘색/핑크색 호환)
+        // 유혹 카드용 갱신 유틸
         function drawTemptCard(side, targetObj, isOverlap) {
             const disp = document.getElementById('display-' + side);
             const stat = document.getElementById('status-' + side);
@@ -426,12 +440,10 @@
             }
         }
 
-        // 호환성용 우측 카드 가리키기용 래퍼
         function drawCard(side, targetObj, isOverlap) {
             drawTemptCard(side, targetObj, isOverlap);
         }
 
-        // 초단위 데이터를 분:초 형태 문자열로 포맷 가공
         function formatTime(seconds, isArm) {
             if (seconds === -9999) return isArm ? "OFF" : "READY";
             const isNeg = seconds < 0;
