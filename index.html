@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HT 카오스 레이드 통합 보드</title>
-    <!-- Tailwind CSS 로드 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@700;800&display=swap');
@@ -58,7 +57,6 @@
 </head>
 <body class="h-screen w-screen flex flex-col justify-between p-3 text-slate-200">
 
-    <!-- 상단: 파티 초대기 구역 (화면 높이의 약 43% 차지, 3개 파티로 삼등분 최적화) -->
     <div class="h-[43vh] flex flex-col justify-between min-h-0 mb-1 flex-shrink-0">
         <div class="flex items-center justify-between px-1 mb-1">
             <h1 class="text-sm font-black tracking-wider text-amber-500 uppercase">⚔️ CHAOS HORNTAIL RAID BOARD</h1>
@@ -66,20 +64,18 @@
         </div>
         
         <div class="grid grid-cols-3 gap-3 flex-1 min-h-0">
-            <!-- 1파티 (개인유혹파티) -->
             <div class="flex flex-col h-full bg-[#111218] border-t-4 border-pink-500 rounded-lg p-2.5 justify-start gap-1.5">
                 <div class="text-[11px] font-bold text-pink-400 border-b border-slate-800 pb-1 mb-1 text-center">🔥 1파티 (개인유혹)</div>
                 <div class="flex flex-col justify-start gap-1.5 min-h-0 overflow-y-auto">
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-숍 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 text-[9px] font-extrabold px-1 rounded">비숍</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('개쌀숭이', this)">개쌀숭이</button></div>
-                    <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-나로 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[9px] font-extrabold px-1 rounded">나로</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('투딱이', this)">투딱이</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-나로 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[9px] font-extrabold px-1 rounded">나로</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('모공', this)">모공</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-나로 bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[9px] font-extrabold px-1 rounded">나로</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('바람행', this)">바람행</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-샤프 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[9px] font-extrabold px-1 rounded">샤프</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('풍사수', this)">풍사수</button></div>
-                    <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-닼나 bg-purple-500/20 text-purple-400 border border-purple-500/30 text-[9px] font-extrabold px-1 rounded">닼나</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('순종', this)">순종</button></div>
+                    <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-바이퍼 bg-orange-500/20 text-orange-400 border border-orange-500/30 text-[9px] font-extrabold px-1 rounded">바이퍼</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('김갑진', this)">김갑진</button></div>
+                    <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-닼나 bg-purple-500/20 text-purple-400 border border-purple-500/30 text-[9px] font-extrabold px-1 rounded">닼나</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('S2전붕이S2', this)">S2전붕이S2</button></div>
                 </div>
             </div>
 
-            <!-- 2파티 -->
             <div class="flex flex-col h-full bg-[#111218] border-t-4 border-cyan-500 rounded-lg p-2.5 justify-start gap-1.5">
                 <div class="text-[11px] font-bold text-cyan-400 border-b border-slate-800 pb-1 mb-1 text-center">⚡ 2파티</div>
                 <div class="flex flex-col justify-start gap-1.5 min-h-0 overflow-y-auto">
@@ -92,7 +88,6 @@
                 </div>
             </div>
 
-            <!-- 3파티 -->
             <div class="flex flex-col h-full bg-[#111218] border-t-4 border-indigo-500 rounded-lg p-2.5 justify-start gap-1.5">
                 <div class="text-[11px] font-bold text-indigo-400 border-b border-slate-800 pb-1 mb-1 text-center">❄️ 3파티</div>
                 <div class="flex flex-col justify-start gap-1.5 min-h-0 overflow-y-auto">
@@ -100,24 +95,20 @@
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-썬콜 bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[9px] font-extrabold px-1 rounded">썬콜</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('두이', this)">두이</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-썬콜 bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[9px] font-extrabold px-1 rounded">썬콜</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('울페리아', this)">울페리아</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-썬콜 bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[9px] font-extrabold px-1 rounded">썬콜</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('꿀냐미', this)">꿀냐미</button></div>
-                    <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-바이퍼 bg-orange-500/20 text-orange-400 border border-orange-500/30 text-[9px] font-extrabold px-1 rounded">바이퍼</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('김갑진', this)">김갑진</button></div>
                     <div class="flex items-center gap-1.5 bg-[#1a1b23] p-0.5 px-1.5 rounded"><span class="job-tag job-팔라 bg-slate-500/20 text-slate-300 border border-slate-500/30 text-[9px] font-extrabold px-1 rounded">팔라</span><button class="flex-1 text-left text-[11px] font-bold text-slate-300 truncate" onclick="copyInvite('미유밍', this)">미유밍</button></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 하단: 타이머 구역 (화면 높이의 약 54% 차지) -->
     <div class="h-[54vh] border-t border-dashed border-slate-800 pt-2 flex flex-col justify-between min-h-0 flex-shrink-0">
         
-        <!-- 타이머 통합 초기화 컨트롤 -->
         <button onclick="changePhase()" class="w-full py-2 bg-blue-950 hover:bg-blue-900 border border-blue-800 text-blue-400 hover:text-blue-300 font-bold rounded-lg text-xs transition-all duration-150 shadow-md flex-shrink-0 mb-2">
             🔄 타이머 전체 초기화 (버프해제 리셋)
         </button>
 
         <div class="grid grid-cols-3 gap-3 flex-1 min-h-0 pb-1">
             
-            <!-- 1) 좌측 유혹 (좌팔) -->
             <div class="flex flex-col h-full gap-2">
                 <div class="h-[30px] flex-shrink-0"></div>
                 
@@ -135,7 +126,6 @@
                 </div>
             </div>
 
-            <!-- 2) 우측 유혹 (우팔) -->
             <div class="flex flex-col h-full gap-2">
                 <div class="h-[30px] flex-shrink-0"></div>
                 
@@ -153,7 +143,6 @@
                 </div>
             </div>
 
-            <!-- 3) 버프해제 (갈) -->
             <div class="flex flex-col h-full gap-2">
                 <div class="flex items-center justify-between bg-[#15161f] border border-slate-800 rounded-lg p-1 h-[30px] flex-shrink-0">
                     <span class="text-[10px] font-bold text-orange-400 pl-1">버해(갈) 주기</span>
@@ -180,7 +169,6 @@
         </div>
     </div>
 
-    <!-- 복사 상태 알림 모달 바 -->
     <div id="statusBar" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-950/90 border border-emerald-500/50 text-emerald-400 font-bold text-[11px] px-3 py-1.5 rounded-full shadow-lg hidden z-50"></div>
 
     <script>
@@ -338,6 +326,7 @@
             }
         }
 
+        // 초기화 기능
         function changePhase() {
             window.speechSynthesis.cancel();
             if (tL.id) { clearInterval(tL.id); tL.id = null; }
